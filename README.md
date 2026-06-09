@@ -270,9 +270,7 @@ analysis-tamil/
 
 ### Upstream PR
 
-This plugin is being contributed to the OpenSearch project:
-- Repository: https://github.com/tamilhce/OpenSearch
-- Branch: `feature/analysis-tamil`
+https://github.com/opensearch-project/OpenSearch/pull/22037
 
 ## References
 
