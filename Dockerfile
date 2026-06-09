@@ -9,4 +9,4 @@ COPY plugins/analysis-tamil-3.6.0.zip /tmp/
 RUN /usr/share/opensearch/bin/opensearch-plugin install --batch file:///tmp/analysis-tamil-3.6.0.zip
 
 # Clean up
-RUN rm -f /tmp/*.zip
+# RUN rm -f /tmp/*.zip
