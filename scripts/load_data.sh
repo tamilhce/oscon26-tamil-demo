@@ -110,12 +110,18 @@ create_and_load "tirukkural_icu_custom" '{
           "replacement": ""
         }
       },
+      "filter": {
+        "icu_nfc_normalizer": {
+          "type": "icu_normalizer",
+          "name": "nfc"
+        }
+      },
       "analyzer": {
         "tamil_icu_custom": {
           "type": "custom",
           "tokenizer": "icu_tokenizer",
           "char_filter": ["icu_normalizer", "tamil_stem_charfilter"],
-          "filter": ["lowercase"]
+          "filter": ["icu_nfc_normalizer", "lowercase"]
         }
       }
     }
