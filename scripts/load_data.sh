@@ -99,14 +99,25 @@ create_and_load "tirukkural_icu" '{
 }'
 
 echo ""
-echo "[3/4] Creating tirukkural_icu_custom (ICU + char_filter stemming)..."
+echo "[3/4] Creating tirukkural_icu_custom (ICU + stemming filter)..."
 create_and_load "tirukkural_icu_custom" '{
   "settings": {
     "analysis": {
       "char_filter": {
-        "tamil_stem_charfilter": {
+        "tamil_nfc": {
+          "type": "icu_normalizer",
+          "name": "nfc",
+          "mode": "compose"
+        }
+      },
+      "filter": {
+        "tamil_stop": {
+          "type": "stop",
+          "stopwords_path": "analysis/tamil_stop.txt"
+        },
+        "tamil_stem": {
           "type": "pattern_replace",
-          "pattern": "(களுக்கு|களில்|களை|கள்|க்கு|இல்|ால்|உடன்|டையார்|டைமை)$",
+          "pattern": "(க்கு|இல்|களின்|கள்|இன்|ஆல்|டையார்|டைமை|இலார்|ற்கு|த்து|ன்று|ுள்ள|ான|ின்|ும்)$",
           "replacement": ""
         }
       },
@@ -114,8 +125,8 @@ create_and_load "tirukkural_icu_custom" '{
         "tamil_icu_custom": {
           "type": "custom",
           "tokenizer": "icu_tokenizer",
-          "char_filter": ["icu_normalizer", "tamil_stem_charfilter"],
-          "filter": ["lowercase"]
+          "char_filter": ["tamil_nfc"],
+          "filter": ["lowercase", "tamil_stop", "tamil_stem"]
         }
       }
     }
